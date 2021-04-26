@@ -1,183 +1,175 @@
-# ZenVar
+# ZenVar Dictionary
 ## Overview
-Mongoose OS library implementing variant variables (like `var` statement in javascript). Using this library you can create variables which haven't data type declared explicitly, but any one of the followings:   
-* Boolean (`bool`)
-* Integer (`long`)
-* Decimal (`double`)
-* String (`char *`)
-* Dictionary (key/value pair dictionary) - It requires msog_zvar_dic libray.
+Mongoose OS library implementing dictionary data-type for variant variables (key/value pair dictionary).
 
 ```c
-// `NULL` variable initialization (like void* var = `NULL`)
+// Explicit dictionary creation 
+mgos_zvar_t var = mgos_zvar_new_dic();
+
+// Implicit dictionary creation 
 mgos_zvar_t var = mgos_zvar_new();
-
-// Integer variable initialization (like long var = 101;)
-mgos_zvar_t var = mgos_zvar_new_integer(101);
-
-// Boolean variable initialization (like bool var = true;)
-mgos_zvar_t var = mgos_zvar_new_bool(true);
-
-// Decimal variable initialization (like double var = 101.99;)
-mgos_zvar_t var = mgos_zvar_new_decimal(101.99);
-
-// String variable initialization (like char *var = "Lorem Ipsum";)
-mgos_zvar_t var = mgos_zvar_new_str("Lorem Ipsum");
+mgos_zvar_add_key(var, "Name", mgos_zvar_new_str("Mark));
 ```
 ## C/C++ API Reference
-### enum mgos_zvar_type
+### mgos_zvar_new_dic()
 ```c
-enum mgos_zvar_type {
-  MGOS_ZVAR_TYPE_NULL,
-  MGOS_ZVAR_TYPE_BOOL,
-  MGOS_ZVAR_TYPE_INTEGER,
-  MGOS_ZVAR_TYPE_DECIMAL,
-  MGOS_ZVAR_TYPE_STR
-};
+mgos_zvar_t mgos_zvar_new_dic();
 ```
-ZenVar variant data-types.
-### mgos_zvar_get_type()
+Creates an empty dictionary. Returns `NULL` in case of error. 
+### mgos_zvar_is_dic()
 ```c
-enum mgos_zvar_type mgos_zvar_get_type(mgos_zvarc_t var);
+bool mgos_zvar_is_dic(mgos_zvarc_t var);
 ```
-Returns the variable [data-type](https://github.com/zendiy-mgos/zvar#enum-mgos_zvar_get_type).
-
-|Parameter||
-|--|--|
-|var|Variant variable|
-### mgos_zvar_new()
-```c
-mgos_zvar_t mgos_zvar_new();
-```
-Creates a variable and initializes it to `NULL`, with no data-type defined. Returns `NULL` in case of error. 
-### mgos_zvar_new_integer(), mgos_zvar_new_bool(), mgos_zvar_new_decimal() and mgos_zvar_new_str()
-```c       
-mgos_zvar_t mgos_zvar_new_integer(long value);
-mgos_zvar_t mgos_zvar_new_bool(bool value);
-mgos_zvar_t mgos_zvar_new_decimal(double value);
-mgos_zvar_t mgos_zvar_new_str(const char *value);
-```
-Creates and initializes a variable. Returns `NULL` in case of error. Invoking `mgos_zvar_new_str(NULL)` is equivalent to `mgos_zvar_new()`.
-
-|Parameter||
-|--|--|
-|value|Value to be set.|
-### mgos_zvar_set_null()
-```c 
-void mgos_zvar_set_null(mgos_zvar_t var);
-```
-Sets the variable value to `NULL`.
+Returns `true` if the the variable is a dictionary, otherwise `false`.
 
 |Parameter||
 |--|--|
 |var|Variant variable.|
-### mgos_zvar_set_integer(), mgos_zvar_set_bool(), mgos_zvar_set_decimal() and mgos_zvar_set_str()
-```c                                 
-void mgos_zvar_set_integer(mgos_zvar_t var, long value);
-void mgos_zvar_set_bool(mgos_zvar_t var, bool value);
-void mgos_zvar_set_decimal(mgos_zvar_t var, double value);
-void mgos_zvar_set_str(mgos_zvar_t var, const char *value);
-```
-Sets the variable value. Invoking `mgos_zvar_set_str(var, NULL)` is equivalent to `mgos_zvar_set_null(var)`.
-
-|Parameter||
-|--|--|
-|var|Variant variable.|
-|value|Value to be set.|
-### mgos_zvar_set_nstr()
-```c 
-void mgos_zvar_set_nstr(mgos_zvar_t var, const char *value, size_t value_len);
-```
-Sets the variable value. This is a specialized version of `mgos_zvar_set_str` Invoking `mgos_zvar_set_nstr(var, NULL, <any_value>)` is equivalent to `mgos_zvar_set_null(var)`.
-
-|Parameter||
-|--|--|
-|var|Variant variable.|
-|value|String value to set.|
-|value_len|Maximum number of characters to be set. Ignored if the passed `value` parameter is `NULL`.|
-### mgos_zvar_get_integer(), mgos_zvar_get_bool(), mgos_zvar_get_decimal() and mgos_zvar_get_str()
-```c 
-long mgos_zvar_get_integer(mgos_zvarc_t var);
-bool mgos_zvar_get_bool(mgos_zvarc_t var);
-double mgos_zvar_get_decimal(mgos_zvarc_t var);
-const char *mgos_zvar_get_str(mgos_zvarc_t var);
-```
-Returns the variable value.
-
-|Parameter||
-|--|--|
-|var|Variant variable.|
-
-**Remarks**
-
-The returned value depends on the input variable data-type. Please refer to details below.
-|Function / Input|INTEGER|BOOL|DECIMAL|STRING|Any other|
-|--|--|--|--|--|--|
-|mgos_zvar_get_integer|Returns the integer value|Returns `0` if input value is `false`|Returns the integer part of the decimal|Returns `0`|Returns `0`|
-|mgos_zvar_get_bool|Returns `false` if input value is `0`|Returns the boolean value|Returns `false` if input value is `0.0`|Returns `false` if input string is empty|Returns `false`|
-|mgos_zvar_get_decimal|Returns the input value as decimal|Returns `0.0`|Returns the decimal value|Returns `0.0`|Returns `0.0`|
-|mgos_zvar_get_str|Returns `NULL`|Returns `NULL`|Returns `NULL`|Returns the string value|Returns `NULL`|
-### mgos_zvar_is_equal()
+### mgos_zvar_remove_keys()
 ```c
-bool mgos_zvar_is_equal(mgos_zvarc_t var1, mgos_zvarc_t var2);
+void mgos_zvar_remove_keys(mgos_zvar_t var);
 ```
-Compares two variables. Returns `true` if they are equal, otherwise `false`.
+Removes all keys from the dictionary. Removed Keys are also deallocated.
 
 |Parameter||
 |--|--|
-|var1|Variant variable.|
-|var2|Variant variable.| 
-### mgos_zvar_is_null()
+|var|Dictionary variable.|
+### mgos_zvar_remove_key()
 ```c
-bool mgos_zvar_is_null(mgos_zvarc_t var);
+void mgos_zvar_remove_key(mgos_zvar_t var, const char *key);
 ```
-Returns `true` if the variable value is `NULL`, otherwise `false`.
+Removes the key from the dictionary. Removed key is also deallocated.
 
 |Parameter||
 |--|--|
-|var|Variant variable.|
-### mgos_zvar_copy()
+|var|Dictionary variable.|
+|key|The name of the key to be removed.|
+### mgos_zvar_has_key()
 ```c
-bool mgos_zvar_copy(mgos_zvarc_t src_var, mgos_zvar_t dest_var); 
+bool mgos_zvar_has_key(mgos_zvarc_t var, const char *key);
 ```
-Copies the source variable into the destination one. Returns `true` if copied successfully, otherwise `false`.
+Returns `true` if the dictionary contains the key, otherwise `false`.
 
 |Parameter||
 |--|--|
-|src|Source variant variable.|
-|dest|Destination variant variable.|
-### mgos_zvar_length()
+|var|Dictionary variable.|
+|key|Key name.|
+### mgos_zvar_get_keys()
 ```c
-int mgos_zvar_length(mgos_zvarc_t var); 
+mgos_zvar_enum_t mgos_zvar_get_keys(mgos_zvar_t var);
 ```
-Returns the number of items in a dictionary the string length. Returns `0` in all other cases.
+Returns the keys enumerator used by `mgos_zvar_get_next_key`. Returns `NULL` if error.
 
 |Parameter||
 |--|--|
-|var|Variant variable.|
-### mgos_zvar_set_unchanged()
+|var|Dictionary variable.|
+### mgos_zvar_get_next_key()
 ```c
-void mgos_zvar_set_unchanged(mgos_zvar_t var);
+bool mgos_zvar_get_next_key(mgos_zvar_enum_t *key_enum, mgos_zvar_t *out, const char **key_name);
 ```
-Marks the variable as unchanged. This function could be used in compination with `mgos_zvar_is_changed`.
+Gets next key from the enumerator returned by `mgos_zvar_get_keys`. Returns `false` if the end of the enumerator is reached or if error, otherwise `true`.
 
 |Parameter||
 |--|--|
-|var|Variant variable.|
-### mgos_zvar_is_changed()
+|key_enum|Reference to the keys enumerator.|
+|out|Optional. Reference to the output key value. If `NULL`, no key value is returned.|
+|key_name|Optional. Reference to the output key name. If `NULL`, no key name is returned.|
 ```c
-bool mgos_zvar_is_changed(mgos_zvarc_t var);
+// Enumerating dictionary keys
+mgos_zvar_t key_val;
+const char *key_name;
+mgos_zvar_enum_t keys = mgos_zvar_get_keys(var);
+while (mgos_zvar_get_next_key(&keys, &key_val, &key_name)) {
+  // do something...
+}
 ```
-Returns `true` if the variable value is changed since its creation or since the last call of `mgos_zvar_set_unchanged`, otherwise `false`.
-
-|Parameter||
-|--|--|
-|var|Variant variable.|
-### mgos_zvar_free()
+### mgos_zvar_get_ckeys()
 ```c
-void mgos_zvar_free(mgos_zvar_t var);
+mgos_zvarc_enum_t mgos_zvar_get_ckeys(mgos_zvarc_t var);
 ```
-Deallocates the variable. If the variable is an element of a dictionary, it is also removed from the collection. If the variable is a dictionary, all its items are deallocated as well.
+Returns the keys enumerator used by `mgos_zvar_get_next_ckey`. Returns `NULL` if error.
 
 |Parameter||
 |--|--|
-|var|Variant variable.|
+|var|Dictionary variable.|
+### mgos_zvar_get_next_ckey()
+```c
+bool mgos_zvar_get_next_ckey(mgos_zvarc_enum_t *key_enum, mgos_zvarc_t *out, const char **key_name);
+```
+Gets next constant key from the enumerator returned by `mgos_zvar_get_ckeys`. Returns `false` if the end of the enumerator is reached or if error, otherwise `true`.
+
+|Parameter||
+|--|--|
+|key_enum|Reference to the keys enumerator.|
+|out|Optional. Reference to the output constant key value. If `NULL`, no key value is returned.|
+|key_name|Optional. Reference to the output key name. If `NULL`, no key name is returned.|
+```c
+// Enumerating dictionary keys
+mgos_zvarc_t key_val;
+const char *key_name;
+mgos_zvarc_enum_t keys = mgos_zvar_get_ckeys(var);
+while (mgos_zvar_get_next_ckey(&keys, &key_val, &key_name)) {
+  // do something...
+}
+```
+### mgos_zvar_merge()
+```c
+bool mgos_zvar_merge(mgos_zvarc_t src_var, mgos_zvar_t dest_var);
+```
+Merges the source dictionary into the destination one. Returns `true` if merged successfully, otherwise `false`.
+
+|Parameter||
+|--|--|
+|src_var|Source dictionary variable.|
+|dest_var|Destination dictionary variable.|
+### mgos_zvar_get_key()
+```c
+mgos_zvar_t mgos_zvar_get_key(mgos_zvar_t var, const char *key);;
+```
+Returns a key value.
+
+|Parameter||
+|--|--|
+|var|Dictionary variable.|
+|key|Name of the key to be returned.|
+### mgos_zvar_get_ckey()
+```c
+mgos_zvarc_t mgos_zvar_get_ckey(mgos_zvarc_t var, const char *key);
+```
+Returns a key value.
+
+|Parameter||
+|--|--|
+|var|Dictionary variable.|
+|key|Name of the key to be returned.|
+### mgos_zvar_try_get_key()
+```c
+bool mgos_zvar_try_get_key(mgos_zvar_t var, const char *key, mgos_zvar_t *out);
+```
+Try to get a key value. Returns `true` if the key exists, otherwise `false`.
+
+|Parameter||
+|--|--|
+|var|Dictionary variable.|
+|out|Optional. Reference to the output key value. If `NULL`, no key value is returned.|
+### mgos_zvar_try_get_ckey()
+```c
+bool mgos_zvar_try_get_ckey(mgos_zvarc_t var, const char *key, mgos_zvarc_t *out);
+```
+Try to get a key value. Returns `true` if the key exists, otherwise `false`.
+
+|Parameter||
+|--|--|
+|var|Dictionary variable.|
+|out|Optional. Reference to the output constant key value. If `NULL`, no key value is returned.|
+### mgos_zvar_add_key()
+```c
+bool mgos_zvar_add_key(mgos_zvar_t var, const char *key, mgos_zvar_t val);
+```
+Adds the key to the dictionary. Returns `true` if successfully added, otherwise `false`.
+
+|Parameter||
+|--|--|
+|var|Dictionary variable.|
+|key|Key name.|
+|val|Key value.|

@@ -33,6 +33,7 @@ extern "C" {
 #define MGOS_ZVAR_TYPE_DIC 1
 
 typedef struct mgos_zvariant *mgos_zvar_enum_t;
+typedef const struct mgos_zvariant *mgos_zvarc_enum_t;
 
 mgos_zvar_t mgos_zvar_new_dic();
 
@@ -41,13 +42,15 @@ bool mgos_zvar_is_dic(mgos_zvarc_t var);
 void mgos_zvar_remove_keys(mgos_zvar_t var);
 void mgos_zvar_remove_key(mgos_zvar_t var, const char *key);
 bool mgos_zvar_has_key(mgos_zvarc_t var, const char *key);
-mgos_zvar_enum_t mgos_zvar_get_keys(mgos_zvarc_t var);
+
+mgos_zvar_enum_t mgos_zvar_get_keys(mgos_zvar_t var);
+mgos_zvarc_enum_t mgos_zvar_get_ckeys(mgos_zvarc_t var);
 
 bool mgos_zvar_merge(mgos_zvarc_t src_var, mgos_zvar_t dest_var);
 
 mgos_zvarc_t mgos_zvar_get_ckey(mgos_zvarc_t var, const char *key);
 bool mgos_zvar_try_get_ckey(mgos_zvarc_t var, const char *key, mgos_zvarc_t *out);
-bool mgos_zvar_get_next_ckey(mgos_zvar_enum_t *key_enum, mgos_zvarc_t *out, const char **key_name);
+bool mgos_zvar_get_next_ckey(mgos_zvarc_enum_t *key_enum, mgos_zvarc_t *out, const char **key_name);
 
 mgos_zvar_t mgos_zvar_get_key(mgos_zvar_t var, const char *key);
 bool mgos_zvar_try_get_key(mgos_zvar_t var, const char *key, mgos_zvar_t *out);
