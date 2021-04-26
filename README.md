@@ -81,10 +81,10 @@ Gets next key from the enumerator returned by `mgos_zvar_get_keys`. Returns `fal
 |key_name|Optional. Reference to the output key name. If `NULL` no key name is returned.|
 ```c
 // Enumerating dictionary keys
-mgos_zvar_t key_val;
+mgos_zvar_t key_value;
 const char *key_name;
-mgos_zvar_enum_t keys = mgos_zvar_get_keys(dic);
-while (mgos_zvar_get_next_key(&keys, &key_val, &key_name)) {
+mgos_zvar_enum_t keys_enum = mgos_zvar_get_keys(dic);
+while (mgos_zvar_get_next_key(&keys_enum, &key_value, &key_name)) {
   // do something...
 }
 ```
@@ -110,23 +110,13 @@ Gets next constant key from the enumerator returned by `mgos_zvarc_get_keys`. Re
 |key_name|Optional. Reference to the output key name. If `NULL` no key name is returned.|
 ```c
 // Enumerating dictionary keys
-mgos_zvarc_t key_val;
+mgos_zvarc_t key_value;
 const char *key_name;
-mgos_zvarc_enum_t keys = mgos_zvarc_get_keys(var);
-while (mgos_zvarc_get_next_key(&keys, &key_val, &key_name)) {
+mgos_zvarc_enum_t keys_enum = mgos_zvarc_get_keys(var);
+while (mgos_zvarc_get_next_key(&keys_enum, &key_value, &key_name)) {
   // do something...
 }
 ```
-### mgos_zvar_merge()
-```c
-bool mgos_zvar_merge(mgos_zvarc_t src_var, mgos_zvar_t dest_var);
-```
-Merges the source dictionary into the destination one. Returns `true` if merged successfully, otherwise `false`.
-
-|Parameter||
-|--|--|
-|src_var|Source dictionary variable.|
-|dest_var|Destination dictionary variable.|
 ### mgos_zvar_get_key()
 ```c
 mgos_zvar_t mgos_zvar_get_key(mgos_zvar_t dir, const char *key_name);;
@@ -180,3 +170,13 @@ Adds the key to the dictionary. Returns `true` if successfully added, otherwise 
 |dic|Dictionary variable.|
 |key_name|Key name.|
 |key_value|Key value.|
+### mgos_zvar_merge()
+```c
+bool mgos_zvar_merge(mgos_zvarc_t src_var, mgos_zvar_t dest_var);
+```
+Merges the source dictionary into the destination one. If the source variable is not a dictionary it is just copied into the destination. Returns `true` if merged successfully, otherwise `false`.
+
+|Parameter||
+|--|--|
+|src_var|Source variant variable.|
+|dest_var|Destination variant variable.|
