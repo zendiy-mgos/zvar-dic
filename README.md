@@ -27,81 +27,81 @@ Returns `true` if the the variable is a dictionary, otherwise `false`.
 |var|Variant variable.|
 ### mgos_zvar_remove_keys()
 ```c
-void mgos_zvar_remove_keys(mgos_zvar_t var);
+void mgos_zvar_remove_keys(mgos_zvar_t dic);
 ```
 Removes all keys from the dictionary. Removed keys are also deallocated.
 
 |Parameter||
 |--|--|
-|var|Dictionary variable.|
+|dic|Dictionary variable.|
 ### mgos_zvar_remove_key()
 ```c
-void mgos_zvar_remove_key(mgos_zvar_t var, const char *key);
+void mgos_zvar_remove_key(mgos_zvar_t dic, const char *key_name);
 ```
 Removes the key from the dictionary. Removed key is also deallocated.
 
 |Parameter||
 |--|--|
-|var|Dictionary variable.|
-|key|The name of the key to be removed.|
+|dic|Dictionary variable.|
+|key_name|The name of the key to be removed.|
 ### mgos_zvar_has_key()
 ```c
-bool mgos_zvar_has_key(mgos_zvarc_t var, const char *key);
+bool mgos_zvar_has_key(mgos_zvarc_t dic, const char *key_name);
 ```
 Returns `true` if the dictionary contains the key, otherwise `false`.
 
 |Parameter||
 |--|--|
-|var|Dictionary variable.|
-|key|Key name.|
+|dic|Dictionary variable.|
+|key_name|Key name.|
 ### mgos_zvar_get_keys()
 ```c
-mgos_zvar_enum_t mgos_zvar_get_keys(mgos_zvar_t var);
+mgos_zvar_enum_t mgos_zvar_get_keys(mgos_zvar_t dic);
 ```
 Returns the keys enumerator used by `mgos_zvar_get_next_key`. Returns `NULL` if error.
 
 |Parameter||
 |--|--|
-|var|Dictionary variable.|
+|dic|Dictionary variable.|
 ### mgos_zvar_get_next_key()
 ```c
-bool mgos_zvar_get_next_key(mgos_zvar_enum_t *key_enum, mgos_zvar_t *out, const char **key_name);
+bool mgos_zvar_get_next_key(mgos_zvar_enum_t *key_enum, mgos_zvar_t *key_value, const char **key_name);
 ```
 Gets next key from the enumerator returned by `mgos_zvar_get_keys`. Returns `false` if the end of the enumerator is reached or if error, otherwise `true`.
 
 |Parameter||
 |--|--|
 |key_enum|Reference to the keys enumerator.|
-|out|Optional. Reference to the output key value. If `NULL` no key value is returned.|
+|key_value|Optional. Reference to the output key value. If `NULL` no key value is returned.|
 |key_name|Optional. Reference to the output key name. If `NULL` no key name is returned.|
 ```c
 // Enumerating dictionary keys
 mgos_zvar_t key_val;
 const char *key_name;
-mgos_zvar_enum_t keys = mgos_zvar_get_keys(var);
+mgos_zvar_enum_t keys = mgos_zvar_get_keys(dic);
 while (mgos_zvar_get_next_key(&keys, &key_val, &key_name)) {
   // do something...
 }
 ```
 ### mgos_zvarc_get_keys()
 ```c
-mgos_zvarc_enum_t mgos_zvarc_get_keys(mgos_zvarc_t var);
+mgos_zvarc_enum_t mgos_zvarc_get_keys(mgos_zvarc_t dic);
 ```
 Returns the keys enumerator used by `mgos_zvarc_get_next_key`. Returns `NULL` if error.
 
 |Parameter||
 |--|--|
-|var|Dictionary variable.|
+|dic|Dictionary variable.|
 ### mgos_zvarc_get_next_key()
 ```c
-bool mgos_zvarc_get_next_key(mgos_zvarc_enum_t *key_enum, mgos_zvarc_t *out, const char **key_name);
+bool mgos_zvarc_get_next_key(mgos_zvarc_enum_t *key_enum, mgos_zvarc_t *key_value, const char **key_name);
 ```
 Gets next constant key from the enumerator returned by `mgos_zvarc_get_keys`. Returns `false` if the end of the enumerator is reached or if error, otherwise `true`.
 
 |Parameter||
 |--|--|
 |key_enum|Reference to the keys enumerator.|
-|out|Optional. Reference to the output constant key value. If `NULL` no key value is returned.|
+|key_value|Optional. Reference to the output constant key value. If `NULL` no key value is returned.|
 |key_name|Optional. Reference to the output key name. If `NULL` no key name is returned.|
 ```c
 // Enumerating dictionary keys
@@ -124,52 +124,54 @@ Merges the source dictionary into the destination one. Returns `true` if merged 
 |dest_var|Destination dictionary variable.|
 ### mgos_zvar_get_key()
 ```c
-mgos_zvar_t mgos_zvar_get_key(mgos_zvar_t var, const char *key);;
+mgos_zvar_t mgos_zvar_get_key(mgos_zvar_t dir, const char *key_name);;
 ```
 Returns a key value.
 
 |Parameter||
 |--|--|
-|var|Dictionary variable.|
-|key|Name of the key to be returned.|
+|dic|Dictionary variable.|
+|key_name|Name of the key to be returned.|
 ### mgos_zvar_get_ckey()
 ```c
-mgos_zvarc_t mgos_zvar_get_ckey(mgos_zvarc_t var, const char *key);
+mgos_zvarc_t mgos_zvar_get_ckey(mgos_zvarc_t dic, const char *key_name);
 ```
 Returns a key value.
 
 |Parameter||
 |--|--|
-|var|Dictionary variable.|
-|key|Name of the key to be returned.|
+|dic|Dictionary variable.|
+|key_name|Name of the key to be returned.|
 ### mgos_zvar_try_get_key()
 ```c
-bool mgos_zvar_try_get_key(mgos_zvar_t var, const char *key, mgos_zvar_t *out);
+bool mgos_zvar_try_get_key(mgos_zvar_t dic, const char *key_name, mgos_zvar_t *key_value);
 ```
 Try to get a key value. Returns `true` if the key exists, otherwise `false`.
 
 |Parameter||
 |--|--|
-|var|Dictionary variable.|
-|out|Optional. Reference to the output key value. If `NULL` no key value is returned.|
-### mgos_zvar_try_get_ckey()
+|dic|Dictionary variable.|
+|key_name|Optional. Reference to the output key name. If `NULL` no key name is returned.|
+|key_value|Optional. Reference to the output key value. If `NULL` no key value is returned.|
+### mgos_zvarc_try_get_key()
 ```c
-bool mgos_zvar_try_get_ckey(mgos_zvarc_t var, const char *key, mgos_zvarc_t *out);
+bool mgos_zvarc_try_get_key(mgos_zvarc_t dic, const char *key_name, mgos_zvarc_t *key_value);
 ```
 Try to get a key value. Returns `true` if the key exists, otherwise `false`.
 
 |Parameter||
 |--|--|
-|var|Dictionary variable.|
-|out|Optional. Reference to the output constant key value. If `NULL` no key value is returned.|
+|dic|Dictionary variable.|
+|key_name|Optional. Reference to the output key name. If `NULL` no key name is returned.|
+|key_value|Optional. Reference to the output key value. If `NULL` no key value is returned.|
 ### mgos_zvar_add_key()
 ```c
-bool mgos_zvar_add_key(mgos_zvar_t var, const char *key, mgos_zvar_t val);
+bool mgos_zvar_add_key(mgos_zvar_t dic, const char *key_name, mgos_zvar_t key_value);
 ```
 Adds the key to the dictionary. Returns `true` if successfully added, otherwise `false`.
 
 |Parameter||
 |--|--|
-|var|Dictionary variable.|
-|key|Key name.|
-|val|Key value.|
+|dic|Dictionary variable.|
+|key_name|Key name.|
+|key_value|Key value.|
