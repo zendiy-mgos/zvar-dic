@@ -12,8 +12,8 @@ mgos_zvar_add_key(dic1, "Age", mgos_zvar_new_integer(25));
 // Implicit dictionary creation 
 mgos_zvar_t dic2 = mgos_zvar_new();
 mgos_zvar_add_key(dic2, "Name", mgos_zvar_new_str("Jenny"));
-mgos_zvar_add_key(dic1, "Gender", mgos_zvar_new_str("Female"));
-mgos_zvar_add_key(dic1, "Age", mgos_zvar_new_integer(22));
+mgos_zvar_add_key(dic2, "Gender", mgos_zvar_new_str("Female"));
+mgos_zvar_add_key(dic2, "Age", mgos_zvar_new_integer(22));
 ```
 ## C/C++ API Reference
 ### mgos_zvar_new_dic()
@@ -70,13 +70,13 @@ Returns the keys enumerator used by `mgos_zvar_get_next_key`. Returns `NULL` if 
 |dic|Dictionary variable.|
 ### mgos_zvar_get_next_key()
 ```c
-bool mgos_zvar_get_next_key(mgos_zvar_enum_t *key_enum, mgos_zvar_t *key_value, const char **key_name);
+bool mgos_zvar_get_next_key(mgos_zvar_enum_t *keys_enum, mgos_zvar_t *key_value, const char **key_name);
 ```
 Gets next key from the enumerator returned by `mgos_zvar_get_keys`. Returns `false` if the end of the enumerator is reached or if error, otherwise `true`.
 
 |Parameter||
 |--|--|
-|key_enum|Reference to the keys enumerator.|
+|keys_enum|Reference to the keys enumerator.|
 |key_value|Optional. Reference to the output key value. If `NULL` no key value is returned.|
 |key_name|Optional. Reference to the output key name. If `NULL` no key name is returned.|
 ```c
@@ -99,13 +99,13 @@ Returns the keys enumerator used by `mgos_zvarc_get_next_key`. Returns `NULL` if
 |dic|Dictionary variable.|
 ### mgos_zvarc_get_next_key()
 ```c
-bool mgos_zvarc_get_next_key(mgos_zvarc_enum_t *key_enum, mgos_zvarc_t *key_value, const char **key_name);
+bool mgos_zvarc_get_next_key(mgos_zvarc_enum_t *keys_enum, mgos_zvarc_t *key_value, const char **key_name);
 ```
 Gets next constant key from the enumerator returned by `mgos_zvarc_get_keys`. Returns `false` if the end of the enumerator is reached or if error, otherwise `true`.
 
 |Parameter||
 |--|--|
-|key_enum|Reference to the keys enumerator.|
+|keys_enum|Reference to the keys enumerator.|
 |key_value|Optional. Reference to the output constant key value. If `NULL` no key value is returned.|
 |key_name|Optional. Reference to the output key name. If `NULL` no key name is returned.|
 ```c
