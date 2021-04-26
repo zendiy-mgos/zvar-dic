@@ -4,18 +4,23 @@ Mongoose OS library implementing dictionary data-type for variant variables (key
 
 ```c
 // Explicit dictionary creation 
-mgos_zvar_t var = mgos_zvar_new_dic();
+mgos_zvar_t dic1 = mgos_zvar_new_dic();
+mgos_zvar_add_key(dic1, "Name", mgos_zvar_new_str("Mark"));
+mgos_zvar_add_key(dic1, "Gender", mgos_zvar_new_str("Male"));
+mgos_zvar_add_key(dic1, "Age", mgos_zvar_new_integer(25));
 
 // Implicit dictionary creation 
-mgos_zvar_t var = mgos_zvar_new();
-mgos_zvar_add_key(var, "Name", mgos_zvar_new_str("Mark));
+mgos_zvar_t dic2 = mgos_zvar_new();
+mgos_zvar_add_key(dic2, "Name", mgos_zvar_new_str("Jenny"));
+mgos_zvar_add_key(dic1, "Gender", mgos_zvar_new_str("Female"));
+mgos_zvar_add_key(dic1, "Age", mgos_zvar_new_integer(22));
 ```
 ## C/C++ API Reference
 ### mgos_zvar_new_dic()
 ```c
 mgos_zvar_t mgos_zvar_new_dic();
 ```
-Creates an empty dictionary. Returns `NULL` in case of error. 
+Creates an empty dictionary. Returns `NULL` if error. 
 ### mgos_zvar_is_dic()
 ```c
 bool mgos_zvar_is_dic(mgos_zvarc_t var);
