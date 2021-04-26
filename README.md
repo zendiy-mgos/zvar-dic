@@ -29,7 +29,7 @@ Returns `true` if the the variable is a dictionary, otherwise `false`.
 ```c
 void mgos_zvar_remove_keys(mgos_zvar_t var);
 ```
-Removes all keys from the dictionary. Removed Keys are also deallocated.
+Removes all keys from the dictionary. Removed keys are also deallocated.
 
 |Parameter||
 |--|--|
@@ -72,8 +72,8 @@ Gets next key from the enumerator returned by `mgos_zvar_get_keys`. Returns `fal
 |Parameter||
 |--|--|
 |key_enum|Reference to the keys enumerator.|
-|out|Optional. Reference to the output key value. If `NULL`, no key value is returned.|
-|key_name|Optional. Reference to the output key name. If `NULL`, no key name is returned.|
+|out|Optional. Reference to the output key value. If `NULL` no key value is returned.|
+|key_name|Optional. Reference to the output key name. If `NULL` no key name is returned.|
 ```c
 // Enumerating dictionary keys
 mgos_zvar_t key_val;
@@ -83,32 +83,32 @@ while (mgos_zvar_get_next_key(&keys, &key_val, &key_name)) {
   // do something...
 }
 ```
-### mgos_zvar_get_ckeys()
+### mgos_zvarc_get_keys()
 ```c
-mgos_zvarc_enum_t mgos_zvar_get_ckeys(mgos_zvarc_t var);
+mgos_zvarc_enum_t mgos_zvarc_get_keys(mgos_zvarc_t var);
 ```
-Returns the keys enumerator used by `mgos_zvar_get_next_ckey`. Returns `NULL` if error.
+Returns the keys enumerator used by `mgos_zvarc_get_next_key`. Returns `NULL` if error.
 
 |Parameter||
 |--|--|
 |var|Dictionary variable.|
-### mgos_zvar_get_next_ckey()
+### mgos_zvarc_get_next_key()
 ```c
-bool mgos_zvar_get_next_ckey(mgos_zvarc_enum_t *key_enum, mgos_zvarc_t *out, const char **key_name);
+bool mgos_zvarc_get_next_key(mgos_zvarc_enum_t *key_enum, mgos_zvarc_t *out, const char **key_name);
 ```
-Gets next constant key from the enumerator returned by `mgos_zvar_get_ckeys`. Returns `false` if the end of the enumerator is reached or if error, otherwise `true`.
+Gets next constant key from the enumerator returned by `mgos_zvarc_get_keys`. Returns `false` if the end of the enumerator is reached or if error, otherwise `true`.
 
 |Parameter||
 |--|--|
 |key_enum|Reference to the keys enumerator.|
-|out|Optional. Reference to the output constant key value. If `NULL`, no key value is returned.|
-|key_name|Optional. Reference to the output key name. If `NULL`, no key name is returned.|
+|out|Optional. Reference to the output constant key value. If `NULL` no key value is returned.|
+|key_name|Optional. Reference to the output key name. If `NULL` no key name is returned.|
 ```c
 // Enumerating dictionary keys
 mgos_zvarc_t key_val;
 const char *key_name;
-mgos_zvarc_enum_t keys = mgos_zvar_get_ckeys(var);
-while (mgos_zvar_get_next_ckey(&keys, &key_val, &key_name)) {
+mgos_zvarc_enum_t keys = mgos_zvarc_get_keys(var);
+while (mgos_zvarc_get_next_key(&keys, &key_val, &key_name)) {
   // do something...
 }
 ```
@@ -151,7 +151,7 @@ Try to get a key value. Returns `true` if the key exists, otherwise `false`.
 |Parameter||
 |--|--|
 |var|Dictionary variable.|
-|out|Optional. Reference to the output key value. If `NULL`, no key value is returned.|
+|out|Optional. Reference to the output key value. If `NULL` no key value is returned.|
 ### mgos_zvar_try_get_ckey()
 ```c
 bool mgos_zvar_try_get_ckey(mgos_zvarc_t var, const char *key, mgos_zvarc_t *out);
@@ -161,7 +161,7 @@ Try to get a key value. Returns `true` if the key exists, otherwise `false`.
 |Parameter||
 |--|--|
 |var|Dictionary variable.|
-|out|Optional. Reference to the output constant key value. If `NULL`, no key value is returned.|
+|out|Optional. Reference to the output constant key value. If `NULL` no key value is returned.|
 ### mgos_zvar_add_key()
 ```c
 bool mgos_zvar_add_key(mgos_zvar_t var, const char *key, mgos_zvar_t val);
