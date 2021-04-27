@@ -48,7 +48,7 @@ mgos_zvarc_enum_t mgos_zvarc_get_keys(mgos_zvarc_t dic);
 
 bool mgos_zvar_merge(mgos_zvarc_t src_var, mgos_zvar_t dest_var);
 
-mgos_zvarc_t mgos_zvar_get_ckey(mgos_zvarc_t dic, const char *key_name);
+mgos_zvarc_t mgos_zvarc_get_key(mgos_zvarc_t dic, const char *key_name);
 bool mgos_zvarc_try_get_key(mgos_zvarc_t dic, const char *key_name, mgos_zvarc_t *key_value);
 bool mgos_zvarc_get_next_key(mgos_zvarc_enum_t *key_enum, mgos_zvarc_t *key_value, const char **key_name);
 
