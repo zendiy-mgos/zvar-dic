@@ -24,7 +24,7 @@ mgos_zvar_add_key(dic, "Name", mgos_zvar_new_str("Mark"));
 ```
 ## C/C++ API Reference
 ### Inherited APIs
-Because a dictionary is basically a variant, it inherits following APIs defined in [ZenVar library](https://github.com/zendiy-mgos/zvar).
+A dictionary inherits following variant APIs defined in [ZenVar library](https://github.com/zendiy-mgos/zvar).
 - [mgos_zvar_get_type()](https://github.com/zendiy-mgos/zvar#mgos_zvar_get_type)
 - [mgos_zvar_set_null()](https://github.com/zendiy-mgos/zvar#mgos_zvar_set_null)
 - [mgos_zvar_cmp()](https://github.com/zendiy-mgos/zvar#mgos_zvar_cmp)
@@ -34,6 +34,8 @@ Because a dictionary is basically a variant, it inherits following APIs defined 
 - [mgos_zvar_set_unchanged()](https://github.com/zendiy-mgos/zvar#mgos_zvar_set_unchanged)
 - [mgos_zvar_is_changed()](https://github.com/zendiy-mgos/zvar#mgos_zvar_is_changed)
 - [mgos_zvar_free()](https://github.com/zendiy-mgos/zvar#mgos_zvar_free)
+
+In addition, there are dictionary-designed functions.
 ### mgos_zvar_new_dic()
 ```c
 mgos_zvar_t mgos_zvar_new_dic();
