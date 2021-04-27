@@ -103,7 +103,7 @@ mgos_zvar_t key_value;
 const char *key_name;
 mgos_zvar_enum_t keys_enum = mgos_zvar_get_keys(dic);
 while (mgos_zvar_get_next_key(&keys_enum, &key_value, &key_name)) {
-  // do something...
+  printf("Key '%s' found of type %d.", key_name, mgos_zvar_get_type(key_value));
 }
 ```
 ### mgos_zvarc_get_keys()
@@ -132,7 +132,7 @@ mgos_zvarc_t key_value;
 const char *key_name;
 mgos_zvarc_enum_t keys_enum = mgos_zvarc_get_keys(var);
 while (mgos_zvarc_get_next_key(&keys_enum, &key_value, &key_name)) {
-  // do something...
+  printf("Key '%s' found of type %d.", key_name, mgos_zvar_get_type(key_value));
 }
 ```
 ### mgos_zvar_get_key()
