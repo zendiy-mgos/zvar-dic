@@ -23,6 +23,17 @@ mgos_zvar_t dic = mgos_zvar_new_integer(10);
 mgos_zvar_add_key(dic, "Name", mgos_zvar_new_str("Mark"));
 ```
 ## C/C++ API Reference
+### Inherited APIs
+Because a dictionary is basically a variant, it inherits following APIs defined in [ZenVar library](https://github.com/zendiy-mgos/zvar).
+- [mgos_zvar_get_type()](https://github.com/zendiy-mgos/zvar#mgos_zvar_get_type)
+- [mgos_zvar_set_null()](https://github.com/zendiy-mgos/zvar#mgos_zvar_set_null)
+- [mgos_zvar_cmp()](https://github.com/zendiy-mgos/zvar#mgos_zvar_cmp)
+- [mgos_zvar_is_null()](https://github.com/zendiy-mgos/zvar#mgos_zvar_is_null)
+- [mgos_zvar_copy()](https://github.com/zendiy-mgos/zvar#mgos_zvar_copy)
+- [mgos_zvar_length()](https://github.com/zendiy-mgos/zvar#mgos_zvar_length)
+- [mgos_zvar_set_unchanged()](https://github.com/zendiy-mgos/zvar#mgos_zvar_set_unchanged)
+- [mgos_zvar_is_changed()](https://github.com/zendiy-mgos/zvar#mgos_zvar_is_changed)
+- [mgos_zvar_free()](https://github.com/zendiy-mgos/zvar#mgos_zvar_free)
 ### mgos_zvar_new_dic()
 ```c
 mgos_zvar_t mgos_zvar_new_dic();
@@ -108,7 +119,7 @@ Returns the keys enumerator of a readonly dictionary, or `NULL` if error. The en
 ```c
 bool mgos_zvarc_get_next_key(mgos_zvarc_enum_t *keys_enum, mgos_zvarc_t *key_value, const char **key_name);
 ```
-Gets the next key value iterating readonly dictionary keys. Returns `false` if the end of the enumerator is reached, or `true` otherwise. The retreived key value is readonly.
+Gets the next key value iterating readonly dictionary keys. Returns `false` if the end of the enumerator is reached, or `true` otherwise. The retrieved key value is readonly.
 
 |Parameter||
 |--|--|
@@ -159,7 +170,7 @@ Try to get the key value of a dictionary. Returns `true` if the key exists, or `
 ```c
 bool mgos_zvarc_try_get_key(mgos_zvarc_t dic, const char *key_name, mgos_zvarc_t *key_value);
 ```
-Try to get the key value of a readonly dictionary. Returns `true` if the key exists, or `false` otherwise. The returned value is readonly.
+Try to get the key value of a readonly dictionary. Returns `true` if the key exists, or `false` otherwise. The retrieved key value is readonly.
 
 |Parameter||
 |--|--|
@@ -181,9 +192,9 @@ Adds the key to a dictionary. Returns `true` if successfully added, or `false` o
 ```c
 bool mgos_zvar_merge(mgos_zvarc_t src_var, mgos_zvar_t dest_var);
 ```
-Merges a source dictionary into the destination one. If the source variable is not a dictionary it is just copied into the destination. Returns `true` if merged successfully, or `false` otherwise.
+Merges a source dictionary into the destination one. Returns `true` if merged successfully, or `false` otherwise. If the source variable is not a dictionary it is just copied into the destination variable, like `mgos_zvar_copy` does. (more details [here](https://github.com/zendiy-mgos/zvar#mgos_zvar_copy)). 
 
 |Parameter||
 |--|--|
-|src_var|A source variant variable.|
+|src_var|A source dictionary or variant variable.|
 |dest_var|A destination variant variable.|
