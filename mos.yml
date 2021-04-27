@@ -1,6 +1,6 @@
 author: ZenDIY
 type: lib
-description: This Mongoose OS library allows you to create and manipulate dictionaries.
+description: This Mongoose OS library allows you to create and manipulate variant dictionaries.
 version: 1.0
 
 build_vars:

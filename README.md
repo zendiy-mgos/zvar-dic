@@ -51,7 +51,7 @@ In addition, there are dictionary-designed functions.
 ```c
 mgos_zvar_t mgos_zvar_new_dic();
 ```
-Creates an empty dictionary. Returns `NULL` if error. 
+Creates an empty dictionary. Returns `NULL` if error. The returned dictionary must be deallocated using `mgos_zvar_free` (more details [here](https://github.com/zendiy-mgos/zvar#mgos_zvar_free)).
 ### mgos_zvar_is_dic()
 ```c
 bool mgos_zvar_is_dic(mgos_zvarc_t var);
@@ -212,4 +212,4 @@ Merges a source dictionary into the destination one. Returns `true` if merged su
 |src_var|A source dictionary or variant variable.|
 |dest_var|A destination variant variable.|
 ## To Do
-- Implement javascript APIs for [Mongoose OS MJS](https://github.com/mongoose-os-libs/mjs)
+- Implement javascript APIs for [Mongoose OS MJS](https://github.com/mongoose-os-libs/mjs).
