@@ -11,7 +11,7 @@ This Mongoose OS library allows you to create and manipulate dictionaries adding
 Include the library into your `mos.yml` file.
 ```yaml
 libs:
-  - origin: https://github.com/zendiy-mgos/zbutton-gpio
+  - origin: https://github.com/zendiy-mgos/zvar-dic
 ```
 **C/C++ sample code**
 
@@ -211,3 +211,5 @@ Merges a source dictionary into the destination one. Returns `true` if merged su
 |--|--|
 |src_var|A source dictionary or variant variable.|
 |dest_var|A destination variant variable.|
+## To Do
+- Implement javascript APIs for [Mongoose OS MJS](https://github.com/mongoose-os-libs/mjs)
