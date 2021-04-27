@@ -1,6 +1,6 @@
 author: ZenDIY
 type: lib
-description: Mongoose OS library implementing ZenVar dictionary.
+description: This Mongoose OS library allows you to create and manipulate dictionaries.
 version: 1.0
 
 build_vars:
