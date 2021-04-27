@@ -36,7 +36,7 @@ Returns `true` if the variable is a dictionary, or `false` otherwise.
 
 |Parameter||
 |--|--|
-|var|Variant variable.|
+|var|A variant variable.|
 ### mgos_zvar_remove_keys()
 ```c
 void mgos_zvar_remove_keys(mgos_zvar_t dic);
@@ -45,17 +45,17 @@ Removes all keys from the dictionary. Removed keys are also automatically deallo
 
 |Parameter||
 |--|--|
-|dic|Dictionary variable.|
+|dic|A dictionary.|
 ### mgos_zvar_remove_key()
 ```c
 void mgos_zvar_remove_key(mgos_zvar_t dic, const char *key_name);
 ```
-Removes the key from the dictionary. Removed key is also automatically deallocated.
+Removes the specified key from the dictionary. Removed key is also automatically deallocated.
 
 |Parameter||
 |--|--|
-|dic|Dictionary variable.|
-|key_name|The name of the key to be removed.|
+|dic|A dictionary.|
+|key_name|The name of the key to remove.|
 ### mgos_zvar_has_key()
 ```c
 bool mgos_zvar_has_key(mgos_zvarc_t dic, const char *key_name);
@@ -133,7 +133,7 @@ Returns a key value.
 |Parameter||
 |--|--|
 |dic|Dictionary variable.|
-|key_name|Name of the key to be returned.|
+|key_name|Name of the key to return.|
 ### mgos_zvar_get_ckey()
 ```c
 mgos_zvarc_t mgos_zvar_get_ckey(mgos_zvarc_t dic, const char *key_name);
@@ -143,7 +143,7 @@ Returns a key readonly value.
 |Parameter||
 |--|--|
 |dic|Dictionary variable.|
-|key_name|Name of the key to be returned.|
+|key_name|Name of the key to return.|
 ### mgos_zvar_try_get_key()
 ```c
 bool mgos_zvar_try_get_key(mgos_zvar_t dic, const char *key_name, mgos_zvar_t *key_value);
