@@ -1,6 +1,6 @@
 # ZenVar Dictionary
 ## Overview
-This Mongoose OS library allows you to create and manipulate dictionaries adding or removing keys, easily, like you do in javascript.
+This Mongoose OS library allows you to create and manipulate dictionaries adding or removing keys, easily, like you do in javascript. It extends the [ZenVar library](https://github.com/zendiy-mgos/zvar).
 ## Features
 - **Dynamic size** - You can add or remove keys with no limits.
 - **Dynamic data-type keys** - Key values haven't data type declared explicitly, but any of supported by [ZenVar library](https://github.com/zendiy-mgos/zvar).
@@ -8,17 +8,28 @@ This Mongoose OS library allows you to create and manipulate dictionaries adding
 - **JSON support** - You can dynamically create a dictionary from a JSON string or you can save it as JSON in a very easy way. Just include the [ZenVar JSON library](https://github.com/zendiy-mgos/zvar-json) into your project. 
 
 ## Get Started
+Include the library into your `mos.yml` file.
+```yaml
+libs:
+  - origin: https://github.com/zendiy-mgos/zbutton-gpio
+```
+**C/C++ sample code**
+
 Create an empty dictionary explicitly.
 ```c
+#include "mgos_zvar_dic.h"
+
 mgos_zvar_t dic = mgos_zvar_new_dic();
 ```
-Create a dictionary implicitly just adding one key to a previously created variant instance.
+Otherwise, create a dictionary implicitly just adding one key to a previously created variant instance.
 ```c
-// Example 1 - Dictionary from a type-less(NULL) variant instance 
+#include "mgos_zvar_dic.h"
+
+// Example #1 - Dictionary from a type-less(NULL) variant instance 
 mgos_zvar_t dic = mgos_zvar_new();
 mgos_zvar_add_key(dic, "Name", mgos_zvar_new_str("Mark"));
 
-// Example 2 - Dictionary from an integer variant instance 
+// Example #2 - Dictionary from an integer variant instance 
 mgos_zvar_t dic = mgos_zvar_new_integer(10);
 mgos_zvar_add_key(dic, "Name", mgos_zvar_new_str("Mark"));
 ```
