@@ -51,7 +51,7 @@ In addition, there are dictionary-designed functions.
 ```c
 mgos_zvar_t mgos_zvar_new_dic();
 ```
-Creates an empty dictionary. Returns `NULL` if error. The returned dictionary must be deallocated using `mgos_zvar_free` (more details [here](https://github.com/zendiy-mgos/zvar#mgos_zvar_free)).
+Creates an empty dictionary. Returns `NULL` if error. The returned dictionary must be deallocated using `mgos_zvar_free()` (more details [here](https://github.com/zendiy-mgos/zvar#mgos_zvar_free)).
 ### mgos_zvar_is_dic()
 ```c
 bool mgos_zvar_is_dic(mgos_zvarc_t var);
@@ -94,7 +94,7 @@ Returns `true` if the dictionary contains the key, or `false` otherwise.
 ```c
 mgos_zvar_enum_t mgos_zvar_get_keys(mgos_zvar_t dic);
 ```
-Returns the keys enumerator of a dictionary, or `NULL` if error. The enumerator can be used with `mgos_zvar_get_next_key`.
+Returns the keys enumerator of a dictionary, or `NULL` if error. The enumerator can be used with `mgos_zvar_get_next_key()`.
 
 |Parameter||
 |--|--|
@@ -123,7 +123,7 @@ while (mgos_zvar_get_next_key(&keys_enum, &key_value, &key_name)) {
 ```c
 mgos_zvarc_enum_t mgos_zvarc_get_keys(mgos_zvarc_t dic);
 ```
-Returns the keys enumerator of a readonly dictionary, or `NULL` if error. The enumerator can be used with `mgos_zvarc_get_next_key`.
+Returns the keys enumerator of a readonly dictionary, or `NULL` if error. The enumerator can be used with `mgos_zvarc_get_next_key()`.
 
 |Parameter||
 |--|--|
