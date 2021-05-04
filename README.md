@@ -136,7 +136,7 @@ Gets the next key value iterating readonly dictionary keys. Returns `false` if t
 
 |Parameter||
 |--|--|
-|keys_enum|A reference to a keys enumerator returned by `mgos_zvarc_get_keys()`.|
+|keys_enum|A reference to a readonly keys enumerator returned by `mgos_zvarc_get_keys()`.|
 |key_value|The output readonly key value. Optional, if `NULL` no key value is returned as output.|
 |key_name|The output key name. Optional, if `NULL` no key name is returned as output.|
 ```c
