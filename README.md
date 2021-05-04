@@ -107,9 +107,9 @@ Gets the next key value iterating dictionary keys. Returns `false` if the end of
 
 |Parameter||
 |--|--|
-|keys_enum|A reference to a keys enumerator.|
-|key_value|The output key value. Optional, if `NULL` no key value is returned.|
-|key_name|The output key name. Optional, if `NULL` no key name is returned.|
+|keys_enum|A reference to a keys enumerator returned by `mgos_zvar_get_keys()`.|
+|key_value|The output key value. Optional, if `NULL` no key value is returned as output.|
+|key_name|The output key name. Optional, if `NULL` no key name is returned as output.|
 ```c
 // Example - Iterating dictionary keys
 mgos_zvar_t key_value;
@@ -136,9 +136,9 @@ Gets the next key value iterating readonly dictionary keys. Returns `false` if t
 
 |Parameter||
 |--|--|
-|keys_enum|A reference to a keys enumerator.|
-|key_value|The output readonly key value. Optional, if `NULL` no key value is returned.|
-|key_name|The output key name. Optional, if `NULL` no key name is returned.|
+|keys_enum|A reference to a keys enumerator returned by `mgos_zvarc_get_keys()`.|
+|key_value|The output readonly key value. Optional, if `NULL` no key value is returned as output.|
+|key_name|The output key name. Optional, if `NULL` no key name is returned as output.|
 ```c
 // Example - Iterating readonly dictionary keys
 mgos_zvarc_t key_value;
@@ -188,8 +188,8 @@ Try to get the key value of a readonly dictionary. Returns `true` if the key exi
 |Parameter||
 |--|--|
 |dic|A dictionary.|
-|key_name|The output key name. Optional, if `NULL` no key name is returned.|
-|key_value|The output readonly key value. Optional, if `NULL` no key value is returned.|
+|key_name|The output key name. Optional, if `NULL` no key name is returned as output.|
+|key_value|The output readonly key value. Optional, if `NULL` no key value is returned as output.|
 ### mgos_zvar_add_key()
 ```c
 bool mgos_zvar_add_key(mgos_zvar_t dic, const char *key_name, mgos_zvar_t key_value);
