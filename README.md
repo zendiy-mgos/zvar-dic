@@ -33,7 +33,7 @@ mgos_zvar_add_key(dic, "Name", mgos_zvar_new_str("Mark"));
 mgos_zvar_t dic = mgos_zvar_new_integer(10);
 mgos_zvar_add_key(dic, "Name", mgos_zvar_new_str("Mark"));
 ```
-## C/C++ API Reference
+## C/C++ APIs Reference
 ### Inherited APIs
 A dictionary inherits following variant APIs defined in [ZenVar library](https://github.com/zendiy-mgos/zvar).
 - [mgos_zvar_get_type()](https://github.com/zendiy-mgos/zvar#mgos_zvar_get_type)
@@ -47,12 +47,12 @@ A dictionary inherits following variant APIs defined in [ZenVar library](https:/
 - [mgos_zvar_free()](https://github.com/zendiy-mgos/zvar#mgos_zvar_free)
 
 In addition, there are dictionary-designed functions.
-### mgos_zvar_new_dic()
+### mgos_zvar_new_dic
 ```c
 mgos_zvar_t mgos_zvar_new_dic();
 ```
 Creates an empty dictionary. Returns `NULL` if error. The returned dictionary must be deallocated using `mgos_zvar_free()` (more details [here](https://github.com/zendiy-mgos/zvar#mgos_zvar_free)).
-### mgos_zvar_is_dic()
+### mgos_zvar_is_dic
 ```c
 bool mgos_zvar_is_dic(mgos_zvarc_t var);
 ```
@@ -61,7 +61,7 @@ Returns `true` if the variable is a dictionary, or `false` otherwise.
 |Parameter||
 |--|--|
 |var|A variant variable.|
-### mgos_zvar_remove_keys()
+### mgos_zvar_remove_keys
 ```c
 void mgos_zvar_remove_keys(mgos_zvar_t dic);
 ```
@@ -70,7 +70,7 @@ Removes all keys from the dictionary. Removed keys are also automatically deallo
 |Parameter||
 |--|--|
 |dic|A dictionary.|
-### mgos_zvar_remove_key()
+### mgos_zvar_remove_key
 ```c
 void mgos_zvar_remove_key(mgos_zvar_t dic, const char *key_name);
 ```
@@ -80,7 +80,7 @@ Removes the specified key from the dictionary. Removed key is also automatically
 |--|--|
 |dic|A dictionary.|
 |key_name|The name of the key to remove.|
-### mgos_zvar_has_key()
+### mgos_zvar_has_key
 ```c
 bool mgos_zvar_has_key(mgos_zvarc_t dic, const char *key_name);
 ```
@@ -90,7 +90,7 @@ Returns `true` if the dictionary contains the key, or `false` otherwise.
 |--|--|
 |dic|A dictionary.|
 |key_name|The key name.|
-### mgos_zvar_get_keys()
+### mgos_zvar_get_keys
 ```c
 mgos_zvar_enum_t mgos_zvar_get_keys(mgos_zvar_t dic);
 ```
@@ -99,7 +99,7 @@ Returns the keys enumerator of a dictionary, or `NULL` if error. The enumerator 
 |Parameter||
 |--|--|
 |dic|A dictionary.|
-### mgos_zvar_get_next_key()
+### mgos_zvar_get_next_key
 ```c
 bool mgos_zvar_get_next_key(mgos_zvar_enum_t *keys_enum, mgos_zvar_t *key_value, const char **key_name);
 ```
@@ -119,7 +119,7 @@ while (mgos_zvar_get_next_key(&keys_enum, &key_value, &key_name)) {
   printf("Key '%s' of type %d found in dictionary.", key_name, mgos_zvar_get_type(key_value));
 }
 ```
-### mgos_zvarc_get_keys()
+### mgos_zvarc_get_keys
 ```c
 mgos_zvarc_enum_t mgos_zvarc_get_keys(mgos_zvarc_t dic);
 ```
@@ -128,7 +128,7 @@ Returns the keys enumerator of a readonly dictionary, or `NULL` if error. The en
 |Parameter||
 |--|--|
 |dic|A readonly dictionary.|
-### mgos_zvarc_get_next_key()
+### mgos_zvarc_get_next_key
 ```c
 bool mgos_zvarc_get_next_key(mgos_zvarc_enum_t *keys_enum, mgos_zvarc_t *key_value, const char **key_name);
 ```
@@ -148,7 +148,7 @@ while (mgos_zvarc_get_next_key(&keys_enum, &key_value, &key_name)) {
   printf("Key '%s' of type %d found in dictionary.", key_name, mgos_zvar_get_type(key_value));
 }
 ```
-### mgos_zvar_get_key()
+### mgos_zvar_get_key
 ```c
 mgos_zvar_t mgos_zvar_get_key(mgos_zvar_t dir, const char *key_name);;
 ```
@@ -158,7 +158,7 @@ Returns the key value of a dictionary, or `NULL` if the key doesn't exist.
 |--|--|
 |dic|A dictionary.|
 |key_name|The name of the key to return.|
-### mgos_zvarc_get_key()
+### mgos_zvarc_get_key
 ```c
 mgos_zvarc_t mgos_zvarc_get_key(mgos_zvarc_t dic, const char *key_name);
 ```
@@ -168,7 +168,7 @@ Returns the key value of a readonly dictionary, or `NULL` if the key doesn't exi
 |--|--|
 |dic|A dictionary.|
 |key_name|The name of the key to return.|
-### mgos_zvar_try_get_key()
+### mgos_zvar_try_get_key
 ```c
 bool mgos_zvar_try_get_key(mgos_zvar_t dic, const char *key_name, mgos_zvar_t *key_value);
 ```
@@ -179,7 +179,7 @@ Try to get the key value of a dictionary. Returns `true` if the key exists, or `
 |dic|A dictionary.|
 |key_name|The output key name. Optional, if `NULL` no key name is returned.|
 |key_value|The output key value. Optional, if `NULL` no key value is returned.|
-### mgos_zvarc_try_get_key()
+### mgos_zvarc_try_get_key
 ```c
 bool mgos_zvarc_try_get_key(mgos_zvarc_t dic, const char *key_name, mgos_zvarc_t *key_value);
 ```
@@ -190,7 +190,7 @@ Try to get the key value of a readonly dictionary. Returns `true` if the key exi
 |dic|A dictionary.|
 |key_name|The output key name. Optional, if `NULL` no key name is returned as output.|
 |key_value|The output readonly key value. Optional, if `NULL` no key value is returned as output.|
-### mgos_zvar_add_key()
+### mgos_zvar_add_key
 ```c
 bool mgos_zvar_add_key(mgos_zvar_t dic, const char *key_name, mgos_zvar_t key_value);
 ```
@@ -201,7 +201,7 @@ Adds the key to a dictionary. Returns `true` if successfully added, or `false` o
 |dic|A dictionary.|
 |key_name|The name of the key to add.|
 |key_value|The key value.|
-### mgos_zvar_merge()
+### mgos_zvar_merge
 ```c
 bool mgos_zvar_merge(mgos_zvarc_t src_var, mgos_zvar_t dest_var);
 ```
