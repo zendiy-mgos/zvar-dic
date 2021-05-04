@@ -205,7 +205,7 @@ Adds the key to a dictionary. Returns `true` if successfully added, or `false` o
 ```c
 bool mgos_zvar_merge(mgos_zvarc_t src_var, mgos_zvar_t dest_var);
 ```
-Merges a source dictionary into the destination one. Returns `true` if merged successfully, or `false` otherwise. If the source variable is not a dictionary it is just copied into the destination variable, like `mgos_zvar_copy` does. (more details [here](https://github.com/zendiy-mgos/zvar#mgos_zvar_copy)). 
+Merges a source dictionary into the destination one. Returns `true` if merged successfully, or `false` otherwise. If the source variable is not a dictionary it is just copied into the destination variable, like `mgos_zvar_copy()` does. (more details [here](https://github.com/zendiy-mgos/zvar#mgos_zvar_copy)). 
 
 |Parameter||
 |--|--|
